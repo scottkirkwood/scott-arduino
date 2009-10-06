@@ -1,0 +1,9 @@
+    "   RR   ",
+    "  GGGG  ",
+    "   RR   ",
+    "RRRRRRRR",
+    "O RRRR O",
+    "O  RR  O",
+    "  RRRR  ",
+    " OO  OO ",
+
