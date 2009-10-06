@@ -1,5 +1,5 @@
 --[[
-rem 26-Oct-2008 by msl
+rem Taken from 26-Oct-2008 by msl Minimalistic interavalometer
 @title My Shutter
 ]]
 
