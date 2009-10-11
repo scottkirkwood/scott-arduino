@@ -1,5 +1,5 @@
 --[[
-rem Taken from 26-Oct-2008 by msl Minimalistic interavalometer
+rem 26-Oct-2008 by msl
 @title My Shutter
 ]]
 
@@ -18,8 +18,8 @@ function shoot()
   release "shoot_full"
   release "shoot_half"
   repeat
-		sleep(50)
-	until get_shooting() == false
+    sleep(50)
+  until get_shooting() == false
 end
 
 repeat

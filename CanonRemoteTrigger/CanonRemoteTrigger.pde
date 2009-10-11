@@ -1,14 +1,18 @@
-
+// Scott Kirkwood 
 // Original code from Bruce Allen 23/Jul/09
 
 const int pwPin = 7;  // define pw pin for LV-MaxSonar-EZ1
 const int camPin = 13; //define a pin for Camera
-
+const int distance = 20;  // cm
 //variables needed to store values
 long pulse, inches, cm;
-
+int low_count = 0;
+#define BATTERY 0
 void setup() {
-  Serial.begin(9600); //Begin serial communcation
+  if (!BATTERY) {
+    Serial.begin(9600); //Begin serial communcation
+    Serial.println("Ready for Canon Remote Trigger");
+  }
   all_output();
   pinMode(camPin, OUTPUT); // sets the digital pin as output
   pinMode(pwPin, INPUT);
@@ -23,9 +27,17 @@ void all_output() {
 }
 
 void shoot() {
+  if (!BATTERY) {
+    Serial.println("Shooting");
+  }
+  digitalWrite(camPin, HIGH);
+  delay(800);
+  digitalWrite(camPin, LOW);
+  delay(100);
   digitalWrite(camPin, HIGH);
   delay(500);
   digitalWrite(camPin, LOW);
+  delay(50);
 }
 
 int distance_cm() {
@@ -40,9 +52,17 @@ int distance_cm() {
 
 void loop() {
   cm = distance_cm();
-  if (cm < 35) {
-    shoot();
-    delay(10000);
+  if (!BATTERY) {
+    Serial.print("Distance ");
+    Serial.println(cm);
   }
-  delay(50);
+  if (cm < distance) {
+    low_count++;
+    if (low_count > 2) {
+      shoot();
+      delay(3000);
+      low_count = 0;
+    }
+  }
+  delay(500);
 }
